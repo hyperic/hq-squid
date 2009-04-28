@@ -30,10 +30,10 @@
   <server name="Squid"
           version="2.x">
 
-  <property name="PROC_QUERY"
-            value="State.Name.eq=squid,State.Name.Pne=squid"/>
+    <property name="PROC_QUERY"
+              value="State.Name.eq=squid,State.Name.Pne=squid"/>
 
-  <config>
+    <config>
       <option name="snmpIp"
               description="Squid SNMP agent IP"
               type="ipaddress"
