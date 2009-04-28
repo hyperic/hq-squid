@@ -35,6 +35,8 @@ import org.hyperic.hq.product.SNMPDetector;
 
 public class SquidDetector extends SNMPDetector {
 
+    private static final String HTTP_PORT = "http_port";
+
     private void setOpt(Map opts, String opt, String val) {
         if (opts.containsKey(opt) || //set by process
             (getTypeProperty(opt) != null)) //set in agent.properties
@@ -47,6 +49,7 @@ public class SquidDetector extends SNMPDetector {
     protected Map getProcOpts(long pid) {
         String exe = getProcExe(pid);
         Map opts = super.getProcOpts(pid);
+        boolean hasOptf = false;
         //parse squid.conf for use in discovery templates, example:
         //Squid\ 2.x.AUTOINVENTORY_NAME=squid @%platform.name%:%http_port%"
         String optf = (String)opts.get("-f");
@@ -61,6 +64,7 @@ public class SquidDetector extends SNMPDetector {
             }
         }
         else {
+            hasOptf = true;
             setOpt(opts, INVENTORY_ID, optf); //make inventory id unique
             setOpt(opts, INSTALLPATH, optf);
         }
@@ -90,6 +94,12 @@ public class SquidDetector extends SNMPDetector {
             if (in != null) {
                 try { in.close(); } catch (IOException e) {}
             }
+        }
+        //append http_port for unique name if given -f opt
+        if (hasOptf && opts.containsKey(HTTP_PORT)) {
+            setOpt(opts, AUTOINVENTORY_NAME,
+                   "%platform.name% " + getTypeInfo().getName() +
+                   " @" + opts.get(HTTP_PORT));
         }
         return opts;
     }
