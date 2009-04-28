@@ -35,6 +35,15 @@ import org.hyperic.hq.product.SNMPDetector;
 
 public class SquidDetector extends SNMPDetector {
 
+    private void setOpt(Map opts, String opt, String val) {
+        if (opts.containsKey(opt) || //set by process
+            (getTypeProperty(opt) != null)) //set in agent.properties
+        {
+            return; //dont override user config
+        }
+        opts.put(opt, val);
+    }
+
     protected Map getProcOpts(long pid) {
         String exe = getProcExe(pid);
         Map opts = super.getProcOpts(pid);
@@ -51,6 +60,11 @@ public class SquidDetector extends SNMPDetector {
                 }
             }
         }
+        else {
+            setOpt(opts, INVENTORY_ID, optf); //make inventory id unique
+            setOpt(opts, INSTALLPATH, optf);
+        }
+
         if (optf == null) {
             getLog().debug("Unable to find squid.conf");
             return opts;
