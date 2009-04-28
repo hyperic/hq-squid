@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+        <classpathentry kind="src" path="src"/>
+        <classpathentry kind="var" path="HQ_PDK_HOME/lib/hq-product.jar"/>
+        <classpathentry kind="var" path="HQ_PDK_HOME/lib/hyperic-util.jar"/>
+        <classpathentry kind="var" path="HQ_PDK_HOME/lib/commons-logging.jar"/>
+        <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+        <classpathentry kind="output" path="build/classes"/>
+</classpath>
