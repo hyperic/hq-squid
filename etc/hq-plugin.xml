@@ -24,9 +24,6 @@
  -->
 
 <plugin>
-  <property name="MIBS"
-            value="/etc/squid/mib.txt"/>
-
   <server name="Squid"
           version="2.x">
 
