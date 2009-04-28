@@ -29,6 +29,7 @@
     <javac destdir="${build.dir}/classes"
            optimize="off"
            debug="on"
+           source="1.4" target="1.4"
            classpathref="plugin.classpath">
       <src>
         <path location="src"/>
