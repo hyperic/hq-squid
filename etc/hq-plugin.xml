@@ -33,6 +33,8 @@
     <property name="PROC_QUERY"
               value="State.Name.eq=squid,State.Name.Pne=squid"/>
 
+    <property name="snmpPort.opt" value="snmp_port"/>
+
     <config>
       <option name="snmpIp"
               description="Squid SNMP agent IP"
